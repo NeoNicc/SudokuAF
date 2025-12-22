@@ -297,7 +297,7 @@ function saveHighScore(playerUsername, finalScore) {
     numberButtons.style.display = 'none';
     scoreBar.style.display = 'none';
     gameBoard.style.display = 'none';
-    
+
     const url = 'https://sudokuaf.onrender.com/add-data';
     const data = {
         username: playerUsername,
@@ -336,11 +336,11 @@ function loadHighScores(display) {
             `;
             tableBody.appendChild(tr);
         });
+        if (display == 'yes') {
+            leaderboardContainer.style.display = 'flex';
+        } else {
+            leaderboardContainer.style.display = 'none';
+        }
     })
     .catch(error => console.error('Error:', error));
-    if (display == 'yes') {
-        leaderboardContainer.style.display = 'flex';
-    } else {
-        leaderboardContainer.style.display = 'none';
-    }
 }
