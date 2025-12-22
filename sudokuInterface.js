@@ -289,7 +289,6 @@ submitUsername.onclick = (e) => {
 }
 
 function saveHighScore(playerUsername, finalScore) {
-    leaderboardContainer.style.display = 'flex';
     const url = 'https://sudokuaf.onrender.com/add-data';
     const data = {
         username: playerUsername,
@@ -334,4 +333,5 @@ function loadHighScores() {
         });
     })
     .catch(error => console.error('Error:', error));
+    leaderboardContainer.style.display = 'flex';
 }
