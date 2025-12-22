@@ -107,7 +107,7 @@ function setGame() {
                 //winning condition
                 if (numbersRemaining.length == 0) {
                     saveHighScore(currentUser, currentScore);
-                    setTimeout(loadHighScores(), 500);
+                    setTimeout(loadHighScores(), 1000);
                     return;
                 }
             //incorrect selection
@@ -318,6 +318,7 @@ function saveHighScore(playerUsername, finalScore) {
 }
 
 function loadHighScores() {
+    console.log("loaded");
     fetch('https://sudokuaf.onrender.com/get-highscores')
     .then(response => response.json())
     .then(data => {
