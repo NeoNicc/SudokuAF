@@ -293,13 +293,18 @@ submitUsername.onclick = (e) => {
 }
 
 function saveHighScore(playerUsername, finalScore) {
+    difficultyButtons.style.display = 'none';
+    numberButtons.style.display = 'none';
+    scoreBar.style.display = 'none';
+    gameBoard.style.display = 'none';
+    
     const url = 'https://sudokuaf.onrender.com/add-data';
     const data = {
         username: playerUsername,
         score: finalScore
     }
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -314,10 +319,6 @@ function saveHighScore(playerUsername, finalScore) {
     .catch(error => {
         console.error('Error ', error);
     });
-    difficultyButtons.style.display = 'none';
-    numberButtons.style.display = 'none';
-    scoreBar.style.display = 'none';
-    gameBoard.style.display = 'none';
 }
 
 function loadHighScores(display) {
