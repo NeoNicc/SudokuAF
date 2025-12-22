@@ -1,0 +1,334 @@
+html {
+    text-decoration: none;
+    box-sizing: border-box;
+}
+button {
+    color: black;
+}
+body {
+    background-color: rgba(3, 47, 122, 0.58);
+    margin: 0 auto;
+    font-weight: bold;
+}
+#gameContainer {
+    display: grid; 
+    grid-template-rows: 100px auto;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+#gameTitle {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 8px 10px 10px rgba(7, 1, 91, 0.689);
+    background-color: rgba(203, 225, 250, 0.53);
+    min-width: 550px;
+}
+#gameTitle h1 {
+    margin: 0 0 2px 0;
+    padding: 2px;
+}
+#usernameForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+#usernameForm label {
+    margin: 0 5px;
+    font-size: 26px;
+    font-weight: bold;
+}
+#usernameField {
+    background-color: rgba(162, 195, 255, 0.893);
+    margin: 0 5px;
+    border-radius: 8px;
+    font-size: 20px;
+}
+#submitUsername {
+    background-color: rgba(155, 187, 239, 0.811);
+    border-radius: 8px;
+    border: solid 2px black;
+    box-shadow: 2px 2px 2px 2px black;
+    font-size: 20px;
+    font-weight: bold;
+    height: 30px;
+    width: 120px;
+}
+#leaderboardContainer {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(171, 202, 245, 0.886);
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 0 rgb(32, 59, 88);
+    padding: 5px;
+}
+#leaderboardContainer h2 {
+    align-self: center;
+    justify-self: center;
+}
+th {
+    font-size: 24px;
+}
+#gameBoard {
+    display: grid;
+    grid-template: repeat(9, 60px) / repeat(9, 60px);
+    background-color: rgba(37, 58, 134, 0.811);
+    border-radius: 4px;
+    box-shadow: 3px 2px 10px 0;
+    justify-content: center;
+}
+#gameBoard div {
+    display: flex;
+    background-color: rgb(228, 228, 228);
+    border: solid 2px black;
+    border-radius: 4px;
+    margin: 1px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+}
+#numberButtons {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 6px 0 0 0;
+}
+#numberButtons button {
+    background-color: rgba(110, 165, 240, 0.895);
+    width: 42px;
+    height: 42px;
+    border: solid 2px black;
+    border-radius: 6px;
+    margin: 6px 0;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 2px 1px 4px 0;
+    cursor: pointer;
+}
+
+#hintButton {
+    background-color: rgb(253, 229, 134);
+    width: 80px;
+    height: 60px;
+    border: solid 2px black;
+    border-radius: 6px;
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 1px 1px 3px 0;
+    cursor: pointer;
+}
+#expandScore {
+    background-color: rgba(171, 188, 244, 0.626);
+    width: 80px;
+    height: 60px;
+    border: solid 2px black;
+    border-radius: 6px;
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 1px 1px 3px 0 black;
+    cursor: pointer;
+    display: none;
+}
+#scoreBar {
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 0 black;
+    display: none;
+    gap: 25px;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: rgba(199, 199, 250, 0.304);
+}
+#scoreBar p {
+    padding: 0 10px 0 0;
+    margin: 0;
+}
+#username strong {
+    padding-right: 20px;
+}
+#userBar {
+    display: flex;
+}
+#scoreBarBlock {
+    display: flex;
+}
+
+.newGameButton {
+    background-color: rgba(71, 135, 245, 0.854);
+    width: 80px;
+    height: 48px;
+    border: solid 2px black;
+    border-radius: 6px;
+    margin: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 1px 1px 3px 0 black;
+    cursor: pointer;
+}
+#menuButtons {
+    display: none;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+    background-color: rgba(186, 186, 250, 0.53);
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 2px rgba(1, 17, 35, 0.858);
+    /*width: 40%;*/
+    align-self: center;
+    justify-self: center;
+    padding: 0 10px;
+}
+#difficulties {
+    display: flex;
+    background-color: rgba(201, 212, 247, 0.626);
+    border-radius: 10px;
+    border: solid 2px black;
+    box-shadow: 1px 1px 3px 0 black;
+    height: 60px;
+}
+#difficultyExpander {
+    display: flex;
+    background-color: rgba(171, 188, 244, 0.626);
+    border-radius: 10px;
+    padding: 0 10px;
+    text-wrap: nowrap;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+#difficultyExpander h4 {
+    padding: 0;
+    margin: 0;
+}
+#difficultyButtons {
+    display: none;
+    background-color: rgba(171, 188, 244, 0.626);
+    gap: 20px; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    width: 60%;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 2px 2px 4px 2px black;
+}
+#difficultyButtons h4 {
+    font-size: 18px;
+}
+
+@media screen and (max-width: 600px) {
+    #gameContainer {
+        grid-template-rows: 80px auto;
+    }
+    #gameTitle {
+        font-size: 1.8em;
+        border-radius: 10px;
+        box-shadow: 2px 4px 6px 6px rgba(161, 156, 233, 0.689);
+        min-width: 0;
+    }
+    #gameBoard {
+        grid-template: repeat(9, 40px) / repeat(9, 40px);
+    }
+    #gameBoard div {
+        font-size: 16px;
+    }
+    #numberButtons button {
+        width: 35px;
+        height: 35px;
+    }
+    #menuButtons {
+        gap: 8px;
+        margin-top: 4px;
+        padding: 0 10px;
+    }
+    #hintButton {
+        margin: 0;
+        padding-bottom: 0;
+        height: 30px;
+    }
+    #expandScore {
+        height: 30px;
+    }
+    #difficultyExpander {
+        height: 30px;
+    }
+    #difficulties {
+        height: 30px;
+    }
+    .newGameButton {
+        font-size: 12px;
+        width: 65px;
+        height: 30px;
+    }
+    .newGameButton h4 {
+        font-size: 14px;
+        margin: 0;
+    }
+    #difficultyButtons {
+        display: none;
+        gap: 10px;
+        padding: 0;
+        border: none;
+        border-radius: 10px;
+        width: 100%;
+    }
+    #scoreBar {
+        font-size: 20px;
+        display: none;
+    }
+    #expandScore {
+        display: block;
+    }
+    #usernameForm {
+        font-size: 20px;
+    }
+    #usernameForm label {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    #usernameField {
+        font-size: 16px;
+        width: 140px;
+    }
+    #submitUsername {
+        box-shadow: 1px 1px 2px 2px black;
+        font-size: 18px;
+        font-weight: bold;
+        height: 26px;
+        width: 80px;
+    }
+}
+
+.wiggleButton {
+    animation: rotate-back-and-forth 1s ease-in-out;
+}
+@keyframes rotate-back-and-forth {
+    0% { transform: rotate(0deg); background-color: rgba(227, 165, 165, 0.897); box-shadow: 6px 6px 4px 0;}
+    12% { transform: rotate(15deg); }
+    25% { transform: rotate(0deg); }
+    37% { transform: rotate(-15deg); }
+    50% { transform: rotate(0deg); }
+    62% { transform: rotate(15deg); }
+    75% { transform: rotate(0deg); box-shadow: 2px 2px 2px 0;}
+    87% { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); background-color: rgb(228, 228, 228); box-shadow: none;}
+}
