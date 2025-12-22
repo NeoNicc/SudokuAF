@@ -73,7 +73,7 @@ function setGame() {
         let cell = document.getElementById('row' + (a+1) + 'col' + (b+1));
         cell.textContent = myGame.gameBoard[a][b];
         //grid click event
-        cell.onclick = () => {
+        cell.onclick = async () => {
             numbersRemaining = [];
             //correct selection
             if (cell.textContent == numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
@@ -106,8 +106,12 @@ function setGame() {
                 }
                 //winning condition
                 if (numbersRemaining.length == 0) {
-                    saveHighScore(currentUser, currentScore);
-                    setTimeout(loadHighScores('yes'), 1000);
+                    try {
+                        await saveHighScore(currentUser, currentScore);
+                        loadHighScores('yes');
+                    } catch(error) {
+                        console.error("failed to save: ", error);
+                    }
                     return;
                 }
             //incorrect selection
