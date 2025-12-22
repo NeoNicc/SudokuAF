@@ -291,7 +291,6 @@ submitUsername.onclick = (e) => {
     $('#usernameFormContainer').css('display', 'none');
     username.textContent = currentUser;
     expandButtons('hide');
-    expandButtons('hide');
 }
 
 function saveHighScore(playerUsername, finalScore) {
