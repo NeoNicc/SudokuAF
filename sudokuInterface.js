@@ -76,7 +76,7 @@ function setGame() {
         cell.onclick = () => {
             numbersRemaining = [];
             //correct selection
-            if (cell.textContent == numberReadied[0] && cell.style.color == 'rgba(0, 0, 0, 0)') {
+            if (cell.textContent == numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
                 cell.style.color = 'black';
                 cell.style.backgroundColor = 'rgba(201, 252, 168, 0.89)';
                 setTimeout(() => {
@@ -92,7 +92,7 @@ function setGame() {
                     for (let m = 0; m < 9; m++) {
                         let newCell = document.getElementById(`row${l+1}col${m+1}`);
                         //console.log("newCell " + newCell.textContent);
-                        if (newCell.style.color == 'rgba(0, 0, 0, 0)') {
+                        if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
                             //console.log("newCell value " + newCell.style.color);
                             numbersRemaining += newCell.textContent;
                         }
@@ -122,7 +122,7 @@ function setGame() {
                 for (let m = 0; m < 9; m++) {
                     let newCell = document.getElementById(`row${l+1}col${m+1}`);
                     console.log("newCell " + newCell.textContent);
-                    if (newCell.style.color != 'black') {
+                    if (window.getComputedStyle(newCell).color != 'black') {
                         console.log("newCell value " + newCell.style.color);
                         numbersRemaining += newCell.textContent;
                     }
@@ -157,7 +157,7 @@ function setDifficulty(difficulty) {
         let col = Math.floor(1 + (Math.random() * 9));
         //console.log(col + ' col');
         let cell = document.getElementById('row' + (row) + 'col' + (col));
-        if (cell.style.color == 'rgba(0,0,0,0)') {
+        if (window.getComputedStyle(cell).color == 'rgba(0,0,0,0)') {
             d--;
         } else {
             cell.style.color = 'rgba(0,0,0,0)';
@@ -176,19 +176,19 @@ function checkSpace(num) {
 
 function expandButtons (option) {
     if (option == 'difficulty') {
-        if (difficultyButtons.style.display == 'none') {
+        if (window.getComputedStyle(difficultyButtons).display == 'none') {
             difficultyButtons.style.display = 'flex';
         } else {
             difficultyButtons.style.display = 'none';
         }
     } else if (option == 'scoreBar') {
-        if (scoreBar.style.display == 'none') {
+        if (window.getComputedStyle(scoreBar).display == 'none') {
             scoreBar.style.display = 'flex';
         } else {
             scoreBar.style.display = 'none';
         }
     } else if (option == 'hide') {
-        if (menuButtons.style.display == 'none') {
+        if (window.getComputedStyle(menuButtons).display == 'none') {
             menuButtons.style.display = 'flex';
             difficultyButtons.style.display = 'flex';
             score.style.display = 'block';
@@ -228,7 +228,7 @@ hint.onclick = () => {
         for (let m = 0; m < 9; m++) {
             let newCell = document.getElementById(`row${l+1}col${m+1}`);
             //console.log("newCell " + newCell.textContent);
-            if (newCell.style.color == 'rgba(0, 0, 0, 0)') {
+            if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
                 //console.log("newCell value " + newCell.style.color);
                 numbersRemaining += newCell.textContent;
             }
@@ -240,7 +240,7 @@ hint.onclick = () => {
         for (let b = 0; b < 9; b++) {
             let currentCell = document.getElementById(`row${a+1}col${b+1}`);
             //console.log("currentCell " + currentCell.textContent + " color: " + currentCell.style.color);
-            if (currentCell.style.color == 'rgba(0, 0, 0, 0)' && stopHint == 0) {
+            if (window.getComputedStyle(currentCell).color == 'rgba(0, 0, 0, 0)' && stopHint == 0) {
                 console.log("was blank");
                 console.log("numbersRemaining: " + numbersRemaining[0]);
                 if (currentCell.textContent == numbersRemaining[0]) {
@@ -264,7 +264,7 @@ hint.onclick = () => {
         for (let m = 0; m < 9; m++) {
             let newCell = document.getElementById(`row${l+1}col${m+1}`);
             //console.log("newCell " + newCell.textContent);
-            if (newCell.style.color == 'rgba(0, 0, 0, 0)') {
+            if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
                 //console.log("newCell value " + newCell.style.color);
                 numbersRemaining += newCell.textContent;
             }
