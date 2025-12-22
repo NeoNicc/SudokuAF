@@ -71,6 +71,7 @@ body {
 #leaderboardContainer h2 {
     align-self: center;
     justify-self: center;
+    font-size: 26px;
 }
 th {
     font-size: 24px;
