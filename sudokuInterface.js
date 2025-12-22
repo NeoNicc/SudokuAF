@@ -154,9 +154,7 @@ function setDifficulty(difficulty) {
     }
     for (let d = 0; d < (difficulty + 1); d++) {
         let row = Math.floor(1 + (Math.random() * 9));
-        //console.log(row + " row");
         let col = Math.floor(1 + (Math.random() * 9));
-        //console.log(col + ' col');
         let cell = document.getElementById('row' + (row) + 'col' + (col));
         if (window.getComputedStyle(cell).color == 'rgba(0,0,0,0)') {
             d--;
@@ -228,19 +226,17 @@ hint.onclick = () => {
     for (let l = 0; l < 9; l++) {
         for (let m = 0; m < 9; m++) {
             let newCell = document.getElementById(`row${l+1}col${m+1}`);
-            //console.log("newCell " + newCell.textContent);
+            
             if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
-                //console.log("newCell value " + newCell.style.color);
                 numbersRemaining += newCell.textContent;
             }
         }
     }
-    console.log("clicked");
+    console.log("hint clicked");
     
     for (let a = 0; a < 9; a++) {
         for (let b = 0; b < 9; b++) {
             let currentCell = document.getElementById(`row${a+1}col${b+1}`);
-            //console.log("currentCell " + currentCell.textContent + " color: " + currentCell.style.color);
             if (window.getComputedStyle(currentCell).color == 'rgba(0, 0, 0, 0)' && stopHint == 0) {
                 console.log("was blank");
                 console.log("numbersRemaining: " + numbersRemaining[0]);
@@ -264,14 +260,12 @@ hint.onclick = () => {
     for (let l = 0; l < 9; l++) {
         for (let m = 0; m < 9; m++) {
             let newCell = document.getElementById(`row${l+1}col${m+1}`);
-            //console.log("newCell " + newCell.textContent);
             if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
-                //console.log("newCell value " + newCell.style.color);
                 numbersRemaining += newCell.textContent;
             }
         }
     }
-    if (numbersRemaining.length < 2) {
+    if (numbersRemaining.length < 4) {
         hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
         stopHint++;
         return;
