@@ -104,9 +104,10 @@ function setGame() {
                     hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
                     stopHint;
                 }
+                //winning condition
                 if (numbersRemaining.length == 0) {
                     saveHighScore(currentUser, currentScore);
-                    loadHighScores();
+                    setTimeout(loadHighScores(), 500);
                     return;
                 }
             //incorrect selection
