@@ -64,7 +64,7 @@ function setGame() {
     scoreBar.style.display = 'flex';
     gameBoard.style.display = 'grid';
     numberButtons.style.display = 'flex';
-    loadHighScores();
+    loadHighScores(false);
     currentScore = 0;
     scoreNum.textContent = currentScore;
     hint.style.backgroundColor = 'rgb(253, 229, 134)';
@@ -107,7 +107,7 @@ function setGame() {
                 //winning condition
                 if (numbersRemaining.length == 0) {
                     saveHighScore(currentUser, currentScore);
-                    setTimeout(loadHighScores(), 1000);
+                    setTimeout(loadHighScores(true), 1000);
                     return;
                 }
             //incorrect selection
@@ -316,7 +316,7 @@ function saveHighScore(playerUsername, finalScore) {
     gameBoard.style.display = 'none';
 }
 
-function loadHighScores() {
+function loadHighScores(bool) {
     console.log("loaded");
     fetch('https://sudokuaf.onrender.com/get-highscores')
     .then(response => response.json())
@@ -333,5 +333,7 @@ function loadHighScores() {
         });
     })
     .catch(error => console.error('Error:', error));
-    leaderboardContainer.style.display = 'flex';
+    if (bool == true) {
+        leaderboardContainer.style.display = 'flex';
+    }
 }
