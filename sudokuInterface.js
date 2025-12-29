@@ -75,6 +75,10 @@ function setGame() {
     for (let b = 0; b < 9; b++) {
         let cell = document.getElementById('row' + (a+1) + 'col' + (b+1));
         cell.textContent = myGame.gameBoard[a][b];
+        // Clone cell to remove old event listeners
+        let newCell = cell.cloneNode(true);
+        cell.parentNode.replaceChild(newCell, cell);
+        cell = newCell;
         //grid click event
         cell.onclick = async () => {
             numbersRemaining = [];
@@ -180,17 +184,20 @@ function setDifficulty(difficulty) {
     let gridNums = document.querySelectorAll('#gameBoard div');
     for (let j = 0; j < 81; j++) {
         gridNums[j].style.color = 'black';
+        gridNums[j].classList.remove('blankCell');
     }
-    for (let d = 0; d < (difficulty); d++) {
-        let row = Math.floor(1 + (Math.random() * 9));
-        let col = Math.floor(1 + (Math.random() * 9));
-        let cell = document.getElementById('row' + (row) + 'col' + (col));
-        if (cell.classList.contains('blankCell')) {
-            d--;
-        } else {
+    let blankCount = 0;
+    let attempts = 0;
+    while (blankCount < difficulty && attempts < 1000) {
+        let row = Math.floor(Math.random() * 9);
+        let col = Math.floor(Math.random() * 9);
+        let cell = document.getElementById('row' + (row + 1) + 'col' + (col + 1));
+        if (!cell.classList.contains('blankCell')) {
             cell.style.color = 'rgba(0,0,0,0)';
             cell.classList.add('blankCell');
+            blankCount++;
         }
+        attempts++;
     }
     scoreGain = difficulty;
 }
@@ -217,14 +224,18 @@ function expandButtons (option) {
             scoreBar.style.display = 'none';
         }
     } else if (option == 'hide') {
-        if (window.getComputedStyle(menuButtons).display == 'none') {
-            menuButtons.style.display = 'flex';
+        if (window.getComputedStyle(difficultyButtons).display == 'none') {
             difficultyButtons.style.display = 'flex';
             score.style.display = 'block';
         } else {
-            menuButtons.style.display = 'none';
             difficultyButtons.style.display = 'none';
             score.style.display = 'none';
+        }
+    } else if (option == 'justMenu') {
+        if (window.getComputedStyle(menuButtons).display == 'none') {
+            menuButtons.style.display = 'flex';
+        } else {
+            menuButtons.style.display = 'none';
         }
     }
 }
@@ -235,6 +246,9 @@ easy.onclick = () => {
     setGame();
     setDifficulty(20);
     expandButtons('difficulty');
+    if (window.getComputedStyle(menuButtons).display == 'none') {
+        expandButtons('justMenu');
+    }
 }
 medium.onclick = () => {
     myGame.wipeBoard();
@@ -242,6 +256,9 @@ medium.onclick = () => {
     setGame();
     setDifficulty(30);
     expandButtons('difficulty');
+    if (window.getComputedStyle(menuButtons).display == 'none') {
+        expandButtons('justMenu');
+    }
 }
 hard.onclick = () => {
     myGame.wipeBoard();
@@ -249,6 +266,9 @@ hard.onclick = () => {
     setGame();
     setDifficulty(40);
     expandButtons('difficulty');
+    if (window.getComputedStyle(menuButtons).display == 'none') {
+        expandButtons('justMenu');
+    }
 }
 
 hint.onclick = () => {
