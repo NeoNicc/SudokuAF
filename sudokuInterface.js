@@ -116,7 +116,13 @@ function setGame() {
                 }
             //incorrect selection
             } else if (cell.textContent != numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
-                scoreGain -= 2;
+                if (scoreGain > 0) {
+                    scoreGain -= 2;
+                }
+                if (scoreGain < 0) {
+                    scoreGain = 0;
+                }
+                
                 cell.classList.add('wiggleButton');
                 setTimeout(() => {
                     cell.classList.remove('wiggleButton');
