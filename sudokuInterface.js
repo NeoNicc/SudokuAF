@@ -117,6 +117,7 @@ function setGame() {
                 }
             //incorrect selection
             } else if (cell.textContent != numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
+                numberReadied[0] = 0;
                 if (scoreGain > 0) {
                     scoreGain -= 2;
                 }
