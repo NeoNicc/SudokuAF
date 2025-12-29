@@ -115,7 +115,7 @@ function setGame() {
                     return;
                 }
             //incorrect selection
-            } else {
+            } else if (cell.textContent != numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
                 scoreGain -= 2;
                 cell.classList.add('wiggleButton');
                 setTimeout(() => {

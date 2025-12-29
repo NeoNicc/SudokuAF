@@ -6,9 +6,9 @@ const cors = require('cors');
 const fs = require('fs');
 
 const app = express();
-app.use(cors({
-    origin: 'https://neonicc.github.io'
-}));
+
+const allowedOrigins = ['https://neonicc.github.io', 'http://127.0.0.1:5500', 'http://localhost:3000'];
+app.use(cors({origin: allowedOrigins}));
 app.use(bodyParser.json());
 
 const db = mysql.createConnection ({
