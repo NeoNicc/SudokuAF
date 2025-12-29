@@ -37,7 +37,7 @@ for (let i = 1; i < 10; i++) {
             butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
             butt[a].style.boxShadow = '2px 1px 4px 0';
         }
-        if (numberReadied != button.textContent) {
+        if (numberReadied[0] != button.textContent) {
             numberReadied[0] = button.textContent;
             button.style.transition = 'background-color 1s ease-in-out';
             button.style.backgroundColor = 'rgba(11, 23, 245, 0.66)';
