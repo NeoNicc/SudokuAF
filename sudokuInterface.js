@@ -1,4 +1,5 @@
 let gameBoard = document.getElementById('gameBoard');
+let gameTitle = document.getElementById('gameTitle');
 let newGameButton = document.getElementsByClassName('newGameButton');
 let easy = newGameButton[0];
 let medium = newGameButton[1];
@@ -61,6 +62,7 @@ let myGame = new SudokuGame();
 myGame.generateBoard(0,0);
 
 function setGame() {
+    gameTitle.style.display = 'none';
     leaderboardContainer.style.display = 'none';
     scoreBar.style.display = 'flex';
     gameBoard.style.display = 'grid';
@@ -123,6 +125,8 @@ function setGame() {
                     return;
                 }
             //incorrect selection
+            } else if (numberReadied[0] == 0) {
+                console.log('do nothing');
             } else if (cell.textContent != numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
                 numberReadied[0] = 0;
                 for (let a = 0; a < 9; a++) {
@@ -177,14 +181,15 @@ function setDifficulty(difficulty) {
     for (let j = 0; j < 81; j++) {
         gridNums[j].style.color = 'black';
     }
-    for (let d = 0; d < (difficulty + 1); d++) {
+    for (let d = 0; d < (difficulty); d++) {
         let row = Math.floor(1 + (Math.random() * 9));
         let col = Math.floor(1 + (Math.random() * 9));
         let cell = document.getElementById('row' + (row) + 'col' + (col));
-        if (window.getComputedStyle(cell).color == 'rgba(0,0,0,0)') {
+        if (cell.classList.contains('blankCell')) {
             d--;
         } else {
             cell.style.color = 'rgba(0,0,0,0)';
+            cell.classList.add('blankCell');
         }
     }
     scoreGain = difficulty;
@@ -314,7 +319,7 @@ expandScore.onclick = () => {
 
 submitUsername.onclick = (e) => {
     e.preventDefault();
-    currentUser = $('#usernameField').val();
+    currentUser = $('#usernameField').val() || 'noname';
     console.log(currentUser);
     $('#usernameFormContainer').css('display', 'none');
     username.textContent = currentUser;

@@ -12,7 +12,6 @@ body {
 }
 #gameContainer {
     display: grid; 
-    grid-template-rows: 100px auto;
     justify-content: center;
     align-items: center;
     gap: 5px;
@@ -26,6 +25,7 @@ body {
     box-shadow: 2px 8px 10px 10px rgba(7, 1, 91, 0.689);
     background-color: rgba(203, 225, 250, 0.53);
     min-width: 550px;
+    margin: 8px 0 0 0;
 }
 #gameTitle h1 {
     margin: 0 0 2px 0;
@@ -77,8 +77,8 @@ th {
     font-size: 24px;
 }
 #gameBoard {
-    display: grid;
-    grid-template: repeat(9, 60px) / repeat(9, 60px);
+    display: none;
+    grid-template: repeat(9, 50px) / repeat(9, 50px);
     background-color: rgba(37, 58, 134, 0.811);
     border-radius: 4px;
     box-shadow: 3px 2px 10px 0;
@@ -91,7 +91,7 @@ th {
     border-radius: 4px;
     margin: 1px;
     text-align: center;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bold;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     justify-content: center;
@@ -100,7 +100,7 @@ th {
     
 }
 #numberButtons {
-    display: flex;
+    display: none;
     justify-content: space-evenly;
     margin: 6px 0 0 0;
 }
@@ -120,7 +120,7 @@ th {
 #hintButton {
     background-color: rgb(253, 229, 134);
     width: 80px;
-    height: 60px;
+    height: 40px;
     border: solid 2px black;
     border-radius: 6px;
     margin: 6px 0;
@@ -153,6 +153,7 @@ th {
     font-size: 28px;
     font-weight: bold;
     background-color: rgba(199, 199, 250, 0.304);
+    margin: 8px 0 0 0;
 }
 #scoreBar p {
     padding: 0 10px 0 0;
@@ -170,11 +171,11 @@ th {
 
 .newGameButton {
     background-color: rgba(71, 135, 245, 0.854);
-    width: 80px;
+    width: 25%;
     height: 48px;
     border: solid 2px black;
     border-radius: 6px;
-    margin: 6px;
+    margin: 0;
     font-size: 16px;
     font-weight: bold;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -183,7 +184,7 @@ th {
 }
 #menuButtons {
     display: none;
-    gap: 20px;
+    gap: 4%;
     justify-content: center;
     align-items: center;
     margin-bottom: 6px;
@@ -201,7 +202,7 @@ th {
     border-radius: 10px;
     border: solid 2px black;
     box-shadow: 1px 1px 3px 0 black;
-    height: 60px;
+    height: 40px;
 }
 #difficultyExpander {
     display: flex;
@@ -221,13 +222,13 @@ th {
     display: none;
     background-color: rgba(171, 188, 244, 0.626);
     gap: 20px; 
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
-    padding: 0 10px;
+    padding: 4px 10px;
     border-radius: 10px;
     flex-wrap: wrap;
-    width: 60%;
+    width: 80%;
     align-self: center;
     justify-self: center;
     box-shadow: 2px 2px 4px 2px black;
@@ -237,14 +238,12 @@ th {
 }
 
 @media screen and (max-width: 600px) {
-    #gameContainer {
-        grid-template-rows: 80px auto;
-    }
     #gameTitle {
         font-size: 1.8em;
         border-radius: 10px;
         box-shadow: 2px 4px 6px 6px rgba(161, 156, 233, 0.689);
         min-width: 0;
+        margin: 4px 0 0 0;
     }
     #gameBoard {
         grid-template: repeat(9, 40px) / repeat(9, 40px);
@@ -290,11 +289,12 @@ th {
         padding: 0;
         border: none;
         border-radius: 10px;
-        width: 100%;
+        width: 80%;
     }
     #scoreBar {
         font-size: 20px;
         display: none;
+        margin: 4px 0 0 0;
     }
     #expandScore {
         display: block;
