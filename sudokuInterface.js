@@ -23,6 +23,7 @@ let currentUser = 'noname';
 let numbersRemaining = [];
 let hintNum = 0;
 let stopHint = 0;
+let hintCount = 3;
 
 //readies a number to be checked against
 //on the board
@@ -78,6 +79,12 @@ function setGame() {
             //correct selection
             if (cell.textContent == numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
                 numberReadied[0] = 0;
+                for (let a = 0; a < 9; a++) {
+                    let butt = document.querySelectorAll('#numberButtons button');
+                    butt[a].style.transition = 'background-color 1s ease-out';
+                    butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
+                    butt[a].style.boxShadow = '2px 1px 4px 0';
+                }
                 cell.style.color = 'black';
                 cell.style.backgroundColor = 'rgba(201, 252, 168, 0.89)';
                 setTimeout(() => {
@@ -118,6 +125,12 @@ function setGame() {
             //incorrect selection
             } else if (cell.textContent != numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
                 numberReadied[0] = 0;
+                for (let a = 0; a < 9; a++) {
+                    let butt = document.querySelectorAll('#numberButtons button');
+                    butt[a].style.transition = 'background-color 1s ease-out';
+                    butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
+                    butt[a].style.boxShadow = '2px 1px 4px 0';
+                }
                 if (scoreGain > 0) {
                     scoreGain -= 2;
                 }
@@ -234,54 +247,62 @@ hard.onclick = () => {
 }
 
 hint.onclick = () => {
-    numbersRemaining = [];
-    for (let l = 0; l < 9; l++) {
-        for (let m = 0; m < 9; m++) {
-            let newCell = document.getElementById(`row${l+1}col${m+1}`);
-            
-            if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
-                numbersRemaining += newCell.textContent;
-            }
-        }
-    }
-    console.log("hint clicked");
-    
-    for (let a = 0; a < 9; a++) {
-        for (let b = 0; b < 9; b++) {
-            let currentCell = document.getElementById(`row${a+1}col${b+1}`);
-            if (window.getComputedStyle(currentCell).color == 'rgba(0, 0, 0, 0)' && stopHint == 0) {
-                console.log("was blank");
-                console.log("numbersRemaining: " + numbersRemaining[0]);
-                if (currentCell.textContent == numbersRemaining[0]) {
-                    console.log("success");
-                    currentCell.style.color = 'black';
-                    stopHint++;
+    if (hintCount > 0) {
+        numbersRemaining = [];
+        for (let l = 0; l < 9; l++) {
+            for (let m = 0; m < 9; m++) {
+                let newCell = document.getElementById(`row${l+1}col${m+1}`);
+                
+                if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
+                    numbersRemaining += newCell.textContent;
                 }
             }
         }
-    }
-    stopHint = 0;
-    if (hintNum > 0) {
-        hintNum--;
-    }
-    scoreGain = scoreGain - 5;
-    if (scoreGain < 0) {
-        scoreGain = 0;
-    }
-    numbersRemaining = [];
-    for (let l = 0; l < 9; l++) {
-        for (let m = 0; m < 9; m++) {
-            let newCell = document.getElementById(`row${l+1}col${m+1}`);
-            if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
-                numbersRemaining += newCell.textContent;
+        console.log("hint clicked");
+        
+        for (let a = 0; a < 9; a++) {
+            for (let b = 0; b < 9; b++) {
+                let currentCell = document.getElementById(`row${a+1}col${b+1}`);
+                if (window.getComputedStyle(currentCell).color == 'rgba(0, 0, 0, 0)' && stopHint == 0) {
+                    console.log("was blank");
+                    console.log("numbersRemaining: " + numbersRemaining[0]);
+                    if (currentCell.textContent == numbersRemaining[0]) {
+                        console.log("success");
+                        currentCell.style.color = 'black';
+                        stopHint++;
+                    }
+                }
             }
         }
+        stopHint = 0;
+        if (hintNum > 0) {
+            hintNum--;
+        }
+        scoreGain = scoreGain - 5;
+        if (scoreGain < 0) {
+            scoreGain = 0;
+        }
+        numbersRemaining = [];
+        for (let l = 0; l < 9; l++) {
+            for (let m = 0; m < 9; m++) {
+                let newCell = document.getElementById(`row${l+1}col${m+1}`);
+                if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
+                    numbersRemaining += newCell.textContent;
+                }
+            }
+        }
+        if (numbersRemaining.length < 4) {
+            hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
+            stopHint++;
+            return;
+        }
+        hintCount -= 1;
+        if (hintCount == 0) {
+            hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
+            stopHint++
+        }
     }
-    if (numbersRemaining.length < 4) {
-        hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
-        stopHint++;
-        return;
-    }
+    
 }
 
 difficultyExpander.onclick = () => {
