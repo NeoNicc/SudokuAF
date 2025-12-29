@@ -77,6 +77,7 @@ function setGame() {
             numbersRemaining = [];
             //correct selection
             if (cell.textContent == numberReadied[0] && window.getComputedStyle(cell).color == 'rgba(0, 0, 0, 0)') {
+                numberReadied[0] = 0;
                 cell.style.color = 'black';
                 cell.style.backgroundColor = 'rgba(201, 252, 168, 0.89)';
                 setTimeout(() => {
