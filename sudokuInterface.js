@@ -151,6 +151,7 @@ let myGame = new SudokuGame();
 myGame.generateBoard(0,0);
 
 function setGame() {
+    hintCount = 3;
     queuedCell = null;
     gameTitle.style.display = 'none';
     leaderboardContainer.style.display = 'none';
