@@ -1,3 +1,5 @@
+//This is the pure logic behind the number generation for the sudoku board
+
 class SudokuGame {
     constructor() {
         this.row1 = [0,0,0,0,0,0,0,0,0];

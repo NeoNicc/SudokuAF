@@ -1,3 +1,5 @@
+//This class controls the interface of the game, including the game board, buttons, and score display. It also handles user interactions and updates the game state accordingly.
+
 let gameBoard = document.getElementById('gameBoard');
 let gameTitle = document.getElementById('gameTitle');
 let newGameButton = document.getElementsByClassName('newGameButton');
@@ -59,12 +61,13 @@ for (let i = 1; i < 10; i++) {
                     numButts[c].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
                     numButts[c].style.boxShadow = '2px 1px 4px 0';
                 }
+
+                //tabulates numbersRemaining list to determine the number of
+                //empty spaces remaining on the board
                 for (let l = 0; l < 9; l++) {
                     for (let m = 0; m < 9; m++) {
                         let newCell = document.getElementById(`row${l+1}col${m+1}`);
-                        //console.log("newCell " + newCell.textContent);
-                        if (newCell.classList.contains('blankCell')) {
-                            //console.log("newCell value " + newCell.style.color);
+                        if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
                             numbersRemaining += newCell.textContent;
                         }
                     }
@@ -75,8 +78,10 @@ for (let i = 1; i < 10; i++) {
                     hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
                     stopHint;
                 }
+                console.log("numbersRemaining at 77 --" + numbersRemaining);
                 //winning condition
                 if (numbersRemaining.length == 0) {
+                    console.log("bop 80");
                     try {
                         await saveHighScore(currentUser, currentScore);
                         loadHighScores('yes');
@@ -155,128 +160,129 @@ function setGame() {
     scoreNum.textContent = currentScore;
     hint.style.backgroundColor = 'rgb(253, 229, 134)';
     for (let a = 0; a < 9; a++) {
-    for (let b = 0; b < 9; b++) {
-        let cell = document.getElementById('row' + (a+1) + 'col' + (b+1));
-        cell.textContent = myGame.gameBoard[a][b];
-        // Clone cell to remove old event listeners
-        let newCell = cell.cloneNode(true);
-        cell.parentNode.replaceChild(newCell, cell);
-        cell = newCell;
-        //grid click event
-        cell.onclick = async () => {
-            if (numberReadied[0] == 0 && cell.classList.contains('blankCell')) {
-                if (awaitingNum) {
-                    awaitingNum = false;
-                    queuedCell.style.transition = 'background-color 0.5s ease-in-out';
-                    queuedCell.style.backgroundColor = 'rgba(228, 228, 228, 1)';
-                    queuedCell = null;
+        for (let b = 0; b < 9; b++) {
+            let cell = document.getElementById('row' + (a+1) + 'col' + (b+1));
+            cell.textContent = myGame.gameBoard[a][b];
+            // Clone cell to remove old event listeners
+            let newCell = cell.cloneNode(true);
+            cell.parentNode.replaceChild(newCell, cell);
+            cell = newCell;
+            //grid click event
+            cell.style.backgroundColor = 'rgba(228, 228, 228, 1)';
+            cell.onclick = async () => {
+                if (numberReadied[0] == 0 && cell.classList.contains('blankCell')) {
+                    if (awaitingNum) {
+                        awaitingNum = false;
+                        queuedCell.style.transition = 'background-color 0.5s ease-in-out';
+                        queuedCell.style.backgroundColor = 'rgba(228, 228, 228, 1)';
+                        queuedCell = null;
+                        return;
+                    }
+                    awaitingNum = true;
+                    cell.style.transition = 'background-color 0.5s ease-in-out';
+                    cell.style.backgroundColor = 'rgba(187, 202, 236, 0.61)';
+                    queuedCell = cell;
                     return;
                 }
-                awaitingNum = true;
-                cell.style.transition = 'background-color 0.5s ease-in-out';
-                cell.style.backgroundColor = 'rgba(187, 202, 236, 0.61)';
-                queuedCell = cell;
-                return;
-            }
-            numbersRemaining = [];
-            //correct selection
-            if (cell.textContent == numberReadied[0] && cell.classList.contains('blankCell')) {
-                numberReadied[0] = 0;
-                for (let a = 0; a < 9; a++) {
-                    let butt = document.querySelectorAll('#numberButtons button');
-                    butt[a].style.transition = 'background-color 1s ease-out';
-                    butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
-                    butt[a].style.boxShadow = '2px 1px 4px 0';
-                }
-                cell.style.color = 'black';
-                cell.style.backgroundColor = 'rgba(201, 252, 168, 0.89)';
-                setTimeout(() => {
-                    cell.style.transition = 'background-color 1s ease-out';
+                console.log("numbersRemaining at 183 --" + numbersRemaining);
+                numbersRemaining = [];
+                console.log("numbersRemaining at 185 --" + numbersRemaining);
+                //correct selection
+                if (cell.textContent == numberReadied[0] && cell.classList.contains('blankCell')) {
+                    numberReadied[0] = 0;
+                    for (let a = 0; a < 9; a++) {
+                        let butt = document.querySelectorAll('#numberButtons button');
+                        butt[a].style.transition = 'background-color 1s ease-out';
+                        butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
+                        butt[a].style.boxShadow = '2px 1px 4px 0';
+                    }
+                    cell.style.color = 'black';
+                    cell.style.backgroundColor = 'rgba(201, 252, 168, 0.89)';
+                    setTimeout(() => {
+                        cell.style.transition = 'background-color 1s ease-out';
+                        cell.style.backgroundColor = 'rgba(228, 228, 228, 1)';
+                    }, 400);
+                    let numButts = document.querySelectorAll('#numberButtons button');
+                    for (let c = 0; c < 9; c++) {
+                        numButts[c].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
+                        numButts[c].style.boxShadow = '2px 1px 4px 0';
+                    }
+                    for (let l = 0; l < 9; l++) {
+                        for (let m = 0; m < 9; m++) {
+                            let newCell = document.getElementById(`row${l+1}col${m+1}`);
+                            if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
+                                numbersRemaining += newCell.textContent;
+                            }
+                        }
+                    }
+                    currentScore += scoreGain;
+                    scoreNum.textContent = currentScore;
+                    if (numbersRemaining.length < 2) {
+                        hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
+                        stopHint;
+                    }
+                    //winning condition
+                    if (numbersRemaining.length == 0) {
+                        try {
+                            await saveHighScore(currentUser, currentScore);
+                            loadHighScores('yes');
+                        } catch(error) {
+                            console.error("failed to save: ", error);
+                        }
+                        return;
+                    }
+                //incorrect selection
+                } else if (numberReadied[0] == 0) {
+                    console.log('do nothing');
+                } else if (cell.textContent != numberReadied[0] && cell.classList.contains('blankCell')) {
+                    numberReadied[0] = 0;
+                    // If user selected number then cell, operate on the clicked cell (not queuedCell)
+                    cell.style.transition = 'background-color 0.5s ease-in-out';
                     cell.style.backgroundColor = 'rgba(228, 228, 228, 1)';
-                }, 400);
-                let numButts = document.querySelectorAll('#numberButtons button');
-                for (let c = 0; c < 9; c++) {
-                    numButts[c].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
-                    numButts[c].style.boxShadow = '2px 1px 4px 0';
+                    queuedCell = null;
+                    for (let a = 0; a < 9; a++) {
+                        let butt = document.querySelectorAll('#numberButtons button');
+                        butt[a].style.transition = 'background-color 1s ease-out';
+                        butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
+                        butt[a].style.boxShadow = '2px 1px 4px 0';
+                    }
+                    if (scoreGain > 0) {
+                        scoreGain -= 2;
+                    }
+                    if (scoreGain < 0) {
+                        scoreGain = 0;
+                    }
+                    
+                    cell.classList.add('wiggleButton');
+                    setTimeout(() => {
+                        cell.classList.remove('wiggleButton');
+                    }, 1000);
                 }
+                numbersRemaining = [];
                 for (let l = 0; l < 9; l++) {
                     for (let m = 0; m < 9; m++) {
                         let newCell = document.getElementById(`row${l+1}col${m+1}`);
-                        //console.log("newCell " + newCell.textContent);
-                        if (window.getComputedStyle(newCell).color == 'rgba(0, 0, 0, 0)') {
+                        //console.log("newCell " + newCell.textContent + "bop 260");
+                        if (window.getComputedStyle(newCell).color != 'black') {
                             //console.log("newCell value " + newCell.style.color);
                             numbersRemaining += newCell.textContent;
                         }
                     }
                 }
-                currentScore += scoreGain;
-                scoreNum.textContent = currentScore;
-                if (numbersRemaining.length < 2) {
-                    hint.style.backgroundColor = 'rgba(248, 245, 61, 0.21)';
-                    stopHint;
-                }
-                //winning condition
-                if (numbersRemaining.length == 0) {
-                    try {
-                        await saveHighScore(currentUser, currentScore);
-                        loadHighScores('yes');
-                    } catch(error) {
-                        console.error("failed to save: ", error);
-                    }
-                    return;
-                }
-            //incorrect selection
-            } else if (numberReadied[0] == 0) {
-                console.log('do nothing');
-            } else if (cell.textContent != numberReadied[0] && cell.classList.contains('blankCell')) {
-                numberReadied[0] = 0;
-                // If user selected number then cell, operate on the clicked cell (not queuedCell)
-                cell.style.transition = 'background-color 0.5s ease-in-out';
-                cell.style.backgroundColor = 'rgba(228, 228, 228, 1)';
-                queuedCell = null;
-                for (let a = 0; a < 9; a++) {
-                    let butt = document.querySelectorAll('#numberButtons button');
-                    butt[a].style.transition = 'background-color 1s ease-out';
-                    butt[a].style.backgroundColor = 'rgba(110, 165, 240, 0.895)';
-                    butt[a].style.boxShadow = '2px 1px 4px 0';
-                }
-                if (scoreGain > 0) {
-                    scoreGain -= 2;
-                }
-                if (scoreGain < 0) {
-                    scoreGain = 0;
-                }
-                
-                cell.classList.add('wiggleButton');
-                setTimeout(() => {
-                    cell.classList.remove('wiggleButton');
-                }, 1000);
+                //console.log("numbersRemaining " + numbersRemaining);
             }
-            numbersRemaining = [];
-            for (let l = 0; l < 9; l++) {
-                for (let m = 0; m < 9; m++) {
-                    let newCell = document.getElementById(`row${l+1}col${m+1}`);
-                    console.log("newCell " + newCell.textContent);
-                    if (window.getComputedStyle(newCell).color != 'black') {
-                        console.log("newCell value " + newCell.style.color);
-                        numbersRemaining += newCell.textContent;
-                    }
-                }
+            if (a == 0 || a == 3) {
+                cell.style.borderTopWidth = `6px`;
+            } else if (a == 2 || a == 5 || a == 8) {
+                cell.style.borderBottomWidth = `6px`;
             }
-            console.log("numbersRemaining " + numbersRemaining);
-        }
-        if (a == 0 || a == 3) {
-            cell.style.borderTopWidth = `6px`;
-        } else if (a == 2 || a == 5 || a == 8) {
-            cell.style.borderBottomWidth = `6px`;
-        }
-        if (b == 0 || b == 3 || b == 6) {
-            cell.style.borderLeftWidth = `6px`;
-        } if (b == 2 || b == 5 || b == 8) {
-            cell.style.borderRightWidth = `6px`;
+            if (b == 0 || b == 3 || b == 6) {
+                cell.style.borderLeftWidth = `6px`;
+            } if (b == 2 || b == 5 || b == 8) {
+                cell.style.borderRightWidth = `6px`;
+            }
         }
     }
-}
 }
 
 //sets up the board to have blanks for the player to fill
@@ -345,7 +351,7 @@ easy.onclick = () => {
     myGame.wipeBoard();
     myGame.generateBoard(0,0);
     setGame();
-    setDifficulty(20);
+    setDifficulty(2);
     expandButtons('difficulty');
     if (window.getComputedStyle(menuButtons).display == 'none') {
         expandButtons('justMenu');
@@ -391,7 +397,7 @@ hint.onclick = () => {
                 let currentCell = document.getElementById(`row${a+1}col${b+1}`);
                 if (window.getComputedStyle(currentCell).color == 'rgba(0, 0, 0, 0)' && stopHint == 0) {
                     console.log("was blank");
-                    console.log("numbersRemaining: " + numbersRemaining[0]);
+                    console.log("numbersRemaining at 401: " + numbersRemaining[0]);
                     if (currentCell.textContent == numbersRemaining[0]) {
                         console.log("success");
                         currentCell.style.color = 'black';
