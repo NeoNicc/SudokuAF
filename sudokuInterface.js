@@ -152,6 +152,7 @@ myGame.generateBoard(0,0);
 
 function setGame() {
     hintCount = 3;
+    stopHint = 0;
     queuedCell = null;
     gameTitle.style.display = 'none';
     leaderboardContainer.style.display = 'none';
