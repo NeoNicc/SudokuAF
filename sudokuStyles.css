@@ -67,6 +67,7 @@ body {
     border-radius: 10px;
     box-shadow: 2px 2px 3px 0 rgb(32, 59, 88);
     padding: 5px;
+    width: 290px;
 }
 #leaderboardContainer h2 {
     align-self: center;
@@ -171,7 +172,7 @@ th {
 
 .newGameButton {
     background-color: rgba(71, 135, 245, 0.854);
-    width: 25%;
+    width: 30%;
     height: 48px;
     border: solid 2px black;
     border-radius: 6px;
@@ -221,14 +222,13 @@ th {
 #difficultyButtons {
     display: none;
     background-color: rgba(171, 188, 244, 0.626);
-    gap: 20px; 
     justify-content: space-around;
     align-items: center;
     text-align: center;
     padding: 4px 10px;
     border-radius: 10px;
     flex-wrap: wrap;
-    width: 80%;
+    width: 92%;
     align-self: center;
     justify-self: center;
     box-shadow: 2px 2px 4px 2px black;
@@ -289,7 +289,6 @@ th {
         padding: 0;
         border: none;
         border-radius: 10px;
-        width: 80%;
     }
     #scoreBar {
         font-size: 20px;
