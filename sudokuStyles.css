@@ -25,7 +25,7 @@ body {
     box-shadow: 2px 8px 10px 10px rgba(7, 1, 91, 0.689);
     background-color: rgba(203, 225, 250, 0.53);
     min-width: 550px;
-    margin: 8px 0 0 0;
+    margin: 8px 0 12px 0;
 }
 #gameTitle h1 {
     margin: 0 0 2px 0;
