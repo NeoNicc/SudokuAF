@@ -42,7 +42,8 @@ for (let i = 1; i < 10; i++) {
             // set the chosen number
             numberReadied[0] = button.textContent;
             numbersRemaining = [];
-            if (queuedCell && queuedCell.textContent == numberReadied[0]) {
+            if (queuedCell && queuedCell.textContent == numberReadied[0] && queuedCell.classList.contains('blankCell')) {
+                queuedCell.classList.remove('blankCell');
                 numberReadied[0] = 0;
                 for (let a = 0; a < 9; a++) {
                     let butt = document.querySelectorAll('#numberButtons button');
@@ -189,6 +190,7 @@ function setGame() {
                 console.log("numbersRemaining at 185 --" + numbersRemaining);
                 //correct selection
                 if (cell.textContent == numberReadied[0] && cell.classList.contains('blankCell')) {
+                    cell.classList.remove('blankCell'); //experimental link
                     numberReadied[0] = 0;
                     for (let a = 0; a < 9; a++) {
                         let butt = document.querySelectorAll('#numberButtons button');
@@ -310,7 +312,7 @@ function setDifficulty(difficulty) {
 }
 
 function checkSpace(num) {
-    if (num == numberReadied[0]) {
+    if (num == numberReadied[0] && queuedCell.classList.contains('blankCell')) { // experimental line
         return true;
     } else {
         return false;
@@ -351,7 +353,7 @@ easy.onclick = () => {
     myGame.wipeBoard();
     myGame.generateBoard(0,0);
     setGame();
-    setDifficulty(2);
+    setDifficulty(24);
     expandButtons('difficulty');
     if (window.getComputedStyle(menuButtons).display == 'none') {
         expandButtons('justMenu');
@@ -361,7 +363,7 @@ medium.onclick = () => {
     myGame.wipeBoard();
     myGame.generateBoard(0,0);
     setGame();
-    setDifficulty(30);
+    setDifficulty(33);
     expandButtons('difficulty');
     if (window.getComputedStyle(menuButtons).display == 'none') {
         expandButtons('justMenu');
@@ -371,7 +373,7 @@ hard.onclick = () => {
     myGame.wipeBoard();
     myGame.generateBoard(0,0);
     setGame();
-    setDifficulty(40);
+    setDifficulty(42);
     expandButtons('difficulty');
     if (window.getComputedStyle(menuButtons).display == 'none') {
         expandButtons('justMenu');
